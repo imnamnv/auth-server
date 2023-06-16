@@ -1,4 +1,4 @@
-const mongoose = requise("mongooes");
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Define our model
