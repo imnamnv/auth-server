@@ -5,7 +5,7 @@ const config = require("../config");
 const { Strategy: JwtStrategy, ExtractJwt } = require("passport-jwt");
 const LocalStrategy = require("passport-local");
 
-// Create local strategy
+// Create local strategy to VERIFY USERNAME/PASSWORD
 const localOptions = { usernameField: "email" }; // get the email to verify, and password by default
 const localLogin = new LocalStrategy(
   localOptions,
@@ -42,8 +42,7 @@ const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader("authorization"), // look the jwt from authorization's header,
   secretOrKey: config.secretKey, // using this key to decrypt
 };
-
-// Create JWT Strategy
+// Create JWT Strategy to VERIFY TOKEN
 const jwtLogin = new JwtStrategy(jwtOptions, async (payload, done) => {
   // See if the user ID in the payload exist (payload: {sub, iat} that we created in tokenForUser function in authentication controller, we decrypt the token to payload) in our database
   // If it does, call 'done' with that other
